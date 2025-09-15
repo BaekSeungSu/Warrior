@@ -17,5 +17,14 @@ public:
 protected:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|Reference")
 	TObjectPtr<AWarriorHeroCharacter> OwningHeroCharacter;
+
+	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
+	bool bShouldEnterRelaxState;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
+	float EnterRelaxStateThreshold = 5.f;
+
+	float IdleElapsedTime;
+	
 	
 };
