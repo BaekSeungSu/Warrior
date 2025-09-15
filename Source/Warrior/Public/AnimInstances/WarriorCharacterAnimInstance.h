@@ -18,10 +18,10 @@ public:
 
 protected:
 	UPROPERTY()
-	AWarriorBaseCharacter* OwningCharacter;
+	TObjectPtr<AWarriorBaseCharacter> OwningCharacter;
 
 	UPROPERTY()
-	UCharacterMovementComponent* OwningMovementComponent;
+	TObjectPtr<UCharacterMovementComponent> OwningMovementComponent;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "AnimData|LocomotionData")
 	float GroundSpeed;
