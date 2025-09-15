@@ -43,7 +43,7 @@ void AWarriorHeroCharacter::BeginPlay()
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
-	checkf(InputConfigDataAsset, TEXT("Forgot to assing a valid data asset as input config"));
+	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config"));
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 	ULocalPlayer* LocalPlayer = GetController<APlayerController>()->GetLocalPlayer();
@@ -53,7 +53,7 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
 	UWarriorInputComponent* WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
-	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::)
+	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& Value)
@@ -76,4 +76,15 @@ void AWarriorHeroCharacter::Input_Move(const FInputActionValue& Value)
 
 void AWarriorHeroCharacter::Input_Look(const FInputActionValue& Value)
 {
+	const FVector2D LookVector = Value.Get<FVector2D>();
+
+	if (LookVector.X != 0.0f)
+	{
+		AddControllerYawInput(LookVector.X);
+	}
+
+	if (LookVector.Y != 0.0f)
+	{
+		AddControllerPitchInput(LookVector.Y);
+	}
 }
