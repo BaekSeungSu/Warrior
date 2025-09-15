@@ -22,7 +22,7 @@ public:
 	FGameplayTag InputTag;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* InputAction;
+	TObjectPtr<UInputAction> InputAction;
 	
 	
 };
@@ -34,7 +34,7 @@ class WARRIOR_API UDataAsset_InputConfig : public UDataAsset
 
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputMappingContext* DefaultMappingContext;
+	TObjectPtr<UInputMappingContext> DefaultMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty = "InputTag"))
 	TArray<FWarriorInputActionConfig> NativeInputActions;
