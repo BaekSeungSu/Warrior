@@ -7,6 +7,8 @@
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "Components/Input/WarriorInputComponent.h"
 #include "WarriorGameplayTags.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
+#include "AbilitySystem/WarriorAttributeSet.h"
 
 #include "WarriorDebugHelper.h"
 
@@ -38,7 +40,6 @@ void AWarriorHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Debug::Print("WarriorHeroCharacter::BeginPlay");
 }
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -54,6 +55,19 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInp
 	UWarriorInputComponent* WarriorInputComponent = CastChecked<UWarriorInputComponent>(PlayerInputComponent);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+}
+
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (IsValid(WarriorAbilitySystemComponent) && IsValid(WarriorAttributeSet))
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor : %s, AvatarActor : %s"), *WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(), *WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		Debug::Print(TEXT("Ability system component valid") + ASCText, FColor::Green);
+		Debug::Print(TEXT("Attribute set valid") + ASCText, FColor::Green);
+		
+	}
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& Value)
