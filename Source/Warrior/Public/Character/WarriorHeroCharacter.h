@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "Character/WarriorBaseCharacter.h"
+#include "GameplayTagContainer.h"
 #include "WarriorHeroCharacter.generated.h"
 
 struct FInputActionValue;
@@ -46,6 +47,9 @@ private:
 
 	void Input_Move(const FInputActionValue& Value);
 	void Input_Look(const FInputActionValue& Value);
+
+	void Input_AbilityInputPressed(FGameplayTag InInputTag);
+	void Input_AbilityInputReleased(FGameplayTag InInputTag);
 	
 #pragma endregion 
 
