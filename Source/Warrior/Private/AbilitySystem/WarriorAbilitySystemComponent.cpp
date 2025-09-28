@@ -4,7 +4,7 @@ void UWarriorAbilitySystemComponent::OnAbilityInputPressed(const FGameplayTag& I
 {
 	if (!InInputTag.IsValid()) return;
 
-	for (const FGameplayAbilitySpec AbilitySpec : GetActivatableAbilities())
+	for (const FGameplayAbilitySpec& AbilitySpec : GetActivatableAbilities())
 	{
 		if (!AbilitySpec.GetDynamicSpecSourceTags().HasTagExact(InInputTag)) continue;
 		TryActivateAbility(AbilitySpec.Handle);
