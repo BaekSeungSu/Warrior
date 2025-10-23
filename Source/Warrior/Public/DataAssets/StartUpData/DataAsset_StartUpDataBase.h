@@ -6,6 +6,7 @@
 
 class UWarriorAbilitySystemComponent;
 class UWarriorGameplayAbility;
+class UGameplayEffect;
 
 UCLASS()
 class WARRIOR_API UDataAsset_StartUpDataBase : public UDataAsset
@@ -22,6 +23,9 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category="StartUpData")
 	TArray<TSubclassOf<UWarriorGameplayAbility>> ReactiveAbilities;
+
+	UPROPERTY(EditDefaultsOnly, Category="StartUpData")
+	TArray<TSubclassOf<UGameplayEffect>> StartUpGameplayEffects;
 	
 	void GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive, UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1);
 };
